@@ -1,0 +1,25 @@
+@import "../bower_components/bootstrap/less/bootstrap.less";
+@icon-font-path: "../fonts/";
+
+body { padding-bottom: @line-height-computed; }
+
+.fork-me img { position: absolute; top: 0; left: 0; border: 0; }
+
+.log-container {
+  overflow-y: auto; height: 186px;
+
+  .table { margin-bottom: 0; }
+  .drift { font-weight: bold; }
+}
+
+.tests {
+  margin-top: @line-height-computed;
+
+  .test {
+    margin-left: 1em;
+
+    &:last-child { margin-bottom: (@line-height-computed / 2); }
+    .test-name { font-weight: bold; margin-bottom: 0; }
+    .glyphicon { margin-right: .5em; }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "name": "pacemaker",
+  "version": "0.0.0",
+  "description": "A better setInterval/setTimeout",
+  "main": "./lib/pacemaker.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "bin": {
+    "timer-comparison": "bin/timer-comparison.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/beardtree/pacemaker.git"
+  },
+  "keywords": [
+    "setInterval",
+    "setTimeout",
+    "precise",
+    "accurate",
+    "drift"
+  ],
+  "author": "Dan Kaplun <dan@beardtree.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/beardtree/pacemaker/issues"
+  },
+  "dependencies": {
+    "present": "^0.0.3"
+  },
+  "peerDependencies": {
+    "bower": "*"
+  },
+  "devDependencies": {
+    "tape": "^2.10.2",
+    "gulp": "^3.5.5",
+    "gulp-jshint": "^1.5.0",
+    "jshint-stylish": "^0.1.5",
+    "gulp-exec": "^1.0.4",
+    "istanbul": "^0.2.6",
+    "gulp-browserify": "^0.5.0",
+    "browserify": "^3.32.1",
+    "envify": "^1.2.1",
+    "browserify-shim": "~3.4.1",
+    "debowerify": "^0.7.0",
+    "deamdify": "^0.1.1",
+    "beardtree/gulp-intreq": "^0.0.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^0.2.1",
+    "gulp-less": "^1.2.2",
+    "less": "^1.7.0",
+    "gulp-flatten": "^0.0.2",
+    "node-static": "^0.7.3",
+    "open": "^0.0.4",
+    "blessed": "^0.0.26",
+    "humanize": "^0.0.9"
+  },
+  "jshintConfig": ".jshintrc",
+  "browserify-shim": {
+    "jquery": "global:jQuery"
+  }
+}

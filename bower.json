@@ -1,0 +1,28 @@
+{
+  "name": "pacemaker",
+  "main": "pacemaker",
+  "version": "0.0.0",
+  "homepage": "https://github.com/beardtree/pacemaker",
+  "authors": [
+    "Dan Kaplun <dan@beardtree.com>"
+  ],
+  "description": "A better setTimeout/setInterval",
+  "keywords": [
+    "setTimeout",
+    "setInterval",
+    "precise",
+    "accurate",
+    "drift"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap": "^3.1.1"
+  }
+}
