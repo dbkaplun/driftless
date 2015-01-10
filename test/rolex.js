@@ -1,6 +1,11 @@
 //#!/usr/bin/env node
 /*global require, global*/
 
+var _setTimeout = global.setTimeout;
+var _clearTimeout = global.clearTimeout;
+var _setInterval = global.setInterval;
+var _clearInterval = global.clearInterval;
+
 var test = require('tape');
 var present = require('present');
 var Rolex = require('../lib/rolex');
@@ -9,11 +14,6 @@ var mockDuration = 5;
 var mockRepeat = 8;
 var mockThreshold = 2;
 var mockAggression = 2;
-
-var _setTimeout = global.setTimeout;
-var _clearTimeout = global.clearTimeout;
-var _setInterval = global.setInterval;
-var _clearInterval = global.clearInterval;
 
 function assertWithin (t, val, expected, range) {
   t.ok(val >= expected - range, "val >= expected - range");
