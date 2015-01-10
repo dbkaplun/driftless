@@ -5,7 +5,6 @@ var jshint = require('gulp-jshint');
 //var recess = require('gulp-recess');
 var exec = require('gulp-exec');
 var browserify = require('gulp-browserify');
-var intreq = require('gulp-intreq');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var less = require('gulp-less');
@@ -59,13 +58,11 @@ gulp.task('build', function () {
   var main = require.resolve('./.');
 
   gulp.src(main)
-    .pipe(browserify({transform: baseBrowserifyTransform, standalone: name}))
-    .pipe(intreq())
+    .pipe(browserify({standalone: name}))
     .pipe(gulp.dest('.'));
 
   gulp.src(main)
-    .pipe(browserify({transform: baseBrowserifyTransform, standalone: name}))
-    .pipe(intreq())
+    .pipe(browserify({standalone: name}))
     .pipe(rename(function (path) { path.basename += '.min'; }))
     .pipe(uglify(uglifyOpts))
     .pipe(gulp.dest('.'));
@@ -73,8 +70,7 @@ gulp.task('build', function () {
 
 gulp.task('www-js', function () {
   gulp.src(path.join(paths.www, 'index.js'))
-    .pipe(browserify({transform: baseBrowserifyTransform}))
-    .pipe(intreq())
+    .pipe(browserify({}))
     .pipe(uglify(uglifyOpts))
     .pipe(gulp.dest(path.join(paths.wwwBuild, 'js')));
 });

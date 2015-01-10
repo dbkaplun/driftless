@@ -32,30 +32,32 @@
     "bower": "*"
   },
   "devDependencies": {
-    "tape": "^2.10.2",
-    "gulp": "^3.5.5",
-    "gulp-jshint": "^1.5.0",
-    "jshint-stylish": "^0.1.5",
-    "gulp-exec": "^1.0.4",
-    "istanbul": "^0.2.6",
-    "gulp-browserify": "^0.5.0",
-    "browserify": "^3.32.1",
-    "envify": "^1.2.1",
-    "browserify-shim": "~3.4.1",
-    "debowerify": "^0.7.0",
+    "blessed": "^0.0.26",
+    "browserify": "^8.1.0",
+    "browserify-shim": "^3.8.2",
     "deamdify": "^0.1.1",
-    "secrettriangle/gulp-intreq": "^0.0.0",
+    "debowerify": "^0.7.0",
+    "envify": "^1.2.1",
+    "gulp": "^3.8.10",
+    "gulp-browserify": "^0.5.1",
+    "gulp-exec": "^1.0.4",
+    "gulp-flatten": "^0.0.2",
+    "gulp-jshint": "^1.9.0",
+    "gulp-less": "^1.2.2",
     "gulp-rename": "^1.2.0",
     "gulp-uglify": "^0.2.1",
-    "gulp-less": "^1.2.2",
+    "humanize": "^0.0.9",
+    "istanbul": "^0.2.6",
+    "jshint-stylish": "^0.1.5",
     "less": "^1.7.0",
-    "gulp-flatten": "^0.0.2",
     "node-static": "^0.7.3",
     "open": "^0.0.4",
-    "blessed": "^0.0.26",
-    "humanize": "^0.0.9"
+    "tape": "^2.10.2"
   },
   "jshintConfig": ".jshintrc",
+  "browserify": {
+    "transform": ["envify", "browserify-shim", "debowerify", "deamdify"]
+  },
   "browserify-shim": {
     "jquery": "global:jQuery"
   }
