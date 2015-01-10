@@ -1,27 +1,27 @@
-pacemaker
+rolex
 =========
 
 Drift-minimizing setInterval replacement and high-precision timer utility for Node and browser
 
-![Comparison between setInterval, pacemaker, and recursive setTimeout](www/timer-comparison.gif)
+![Comparison between setInterval, rolex, and recursive setTimeout](www/timer-comparison.gif)
 
 Installation
 ------------
 
-In Node: `npm install pacemaker`
+In Node: `npm install rolex`
 
 In browser:
 
-1. Copy `pacemaker.js` or `pacemaker.min.js` (with optional source map at `pacemaker.min.js.map`)
-2. `<script src="path/to/pacemaker.{min.}js"></script>`
-3. `setInterval` and `clearInterval` are automatically replaced -- if this is undesired, `Pacemaker.noConflict();`
+1. Copy `rolex.js` or `rolex.min.js` (with optional source map at `rolex.min.js.map`)
+2. `<script src="path/to/rolex.{min.}js"></script>`
+3. `setInterval` and `clearInterval` are automatically replaced -- if this is undesired, `Rolex.noConflict();`
 
 Usage
 -----
 
-    var Pacemaker = require('pacemaker'); // Node only
-    var p = Pacemaker(10, function () {
+    var Rolex = require('rolex'); // Node only
+    var p = Rolex(10, function () {
       console.log('executes in 10 ms');
     }).start();
 
-More examples in [test/pacemaker.js](test/pacemaker.js).
+More examples in [test/rolex.js](test/rolex.js).

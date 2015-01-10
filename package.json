@@ -1,8 +1,8 @@
 {
-  "name": "pacemaker",
+  "name": "rolex",
   "version": "0.0.0",
   "description": "A better setInterval/setTimeout",
-  "main": "./lib/pacemaker.js",
+  "main": "./lib/rolex.js",
   "scripts": {
     "test": "gulp test"
   },
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/beardtree/pacemaker.git"
+    "url": "git://github.com/secrettriangle/rolex.git"
   },
   "keywords": [
     "setInterval",
@@ -20,10 +20,10 @@
     "accurate",
     "drift"
   ],
-  "author": "Dan Kaplun <dan@beardtree.com>",
+  "author": "Dan Kaplun <dan@secrettriangle.net>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/beardtree/pacemaker/issues"
+    "url": "https://github.com/secrettriangle/rolex/issues"
   },
   "dependencies": {
     "present": "^0.0.3"
@@ -44,7 +44,7 @@
     "browserify-shim": "~3.4.1",
     "debowerify": "^0.7.0",
     "deamdify": "^0.1.1",
-    "beardtree/gulp-intreq": "^0.0.0",
+    "secrettriangle/gulp-intreq": "^0.0.0",
     "gulp-rename": "^1.2.0",
     "gulp-uglify": "^0.2.1",
     "gulp-less": "^1.2.2",

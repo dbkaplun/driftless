@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var pacemaker = require('../lib/pacemaker');
+var rolex = require('../lib/rolex');
 var timerComparison = require('../lib/timerComparison');
 var formatNumber = require('../lib/formatNumber');
 var stats = require('../lib/stats');
@@ -27,23 +27,23 @@ var setIntervalLog = blessed.box({
 });
 screen.append(setIntervalLog);
 
-var pacemakerTitle = blessed.box({
+var rolexTitle = blessed.box({
   top: 0,
   left: '33%',
   width: '34%',
   height: 1,
 
   tags: true,
-  content: "{underline}pacemaker{/}"
+  content: "{underline}rolex{/}"
 });
-screen.append(pacemakerTitle);
-var pacemakerLog = blessed.box({
+screen.append(rolexTitle);
+var rolexLog = blessed.box({
   top: 1,
   left: '33%',
   width: '34%',
   tags: true
 });
-screen.append(pacemakerLog);
+screen.append(rolexLog);
 
 var recursiveSetTimeoutTitle = blessed.box({
   top: 0,
@@ -66,7 +66,7 @@ screen.append(recursiveSetTimeoutLog);
 screen.key(['escape', 'q', 'C-c'], function (ch, key) { return process.exit(0); });
 screen.on('resize', function () {
   setIntervalLog.rows = screen.rows - 1;
-  pacemakerLog.rows = screen.rows - 1;
+  rolexLog.rows = screen.rows - 1;
   recursiveSetTimeoutLog.rows = screen.rows - 1;
 });
 
@@ -98,7 +98,7 @@ function logToBox (box, title) {
 timerComparison(ms, function (name) {
   return {
     setInterval: logToBox(setIntervalLog, setIntervalTitle),
-    pacemaker: logToBox(pacemakerLog, pacemakerTitle),
+    rolex: logToBox(rolexLog, rolexTitle),
     recursiveSetTimeout: logToBox(recursiveSetTimeoutLog, recursiveSetTimeoutTitle)
   }[name];
 });

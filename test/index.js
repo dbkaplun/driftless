@@ -1,4 +1,4 @@
 //#!/usr/bin/env node
 /*global require*/
 
-require('./pacemaker');
+require('./rolex');

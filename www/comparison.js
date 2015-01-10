@@ -41,14 +41,14 @@ jQuery(function ($) {
   var $logTemplate = $('#log-template').contents();
   var $setIntervalContainer = $('#setInterval-comparison .log-container')
     .append($logTemplate.clone());
-  var $pacemakerContainer = $('#pacemaker-comparison .log-container')
+  var $rolexContainer = $('#rolex-comparison .log-container')
     .append($logTemplate.clone());
   var $recursiveSetTimeoutContainer = $('#recursiveSetTimeout-comparison .log-container')
     .append($logTemplate.clone());
   timerComparison(ms, function (name) {
     return {
       setInterval: logToContainer($setIntervalContainer),
-      pacemaker: logToContainer($pacemakerContainer),
+      rolex: logToContainer($rolexContainer),
       recursiveSetTimeout: logToContainer($recursiveSetTimeoutContainer)
     }[name];
   });

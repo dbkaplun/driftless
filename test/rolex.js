@@ -3,7 +3,7 @@
 
 var test = require('tape');
 var present = require('present');
-var Pacemaker = require('../lib/pacemaker');
+var Rolex = require('../lib/rolex');
 
 var mockDuration = 5;
 var mockRepeat = 8;
@@ -20,22 +20,22 @@ function assertWithin (t, val, expected, range) {
   t.ok(val <= expected + range, "val <= expected + range");
 }
 
-function assertPacemakerReturnsValues (t, p, expected) {
+function assertRolexReturnsValues (t, p, expected) {
   ['duration', 'tick', 'repeat', 'threshold', 'aggression'].forEach(function (name) {
-    var val = (expected || {})[name] || (Pacemaker._getterSetters[name] || {}).defaultVal;
+    var val = (expected || {})[name] || (Rolex._getterSetters[name] || {}).defaultVal;
     t.equal(p[name](), val, "p." + name + "() equals " + val);
   });
 }
 
 function testGetterSetterCoersion (name, t) {
   t.test("should coerce arg", function (st) {
-    var p = Pacemaker();
+    var p = Rolex();
 
     [null, undefined, 0, '', false, [], new Date(), new Error(), new RegExp(), function () {}].forEach(function (value) {
       try { p[name](value); } catch (e) { return; }
 
       var
-        typedValue = Pacemaker._coerce(name, value),
+        typedValue = Rolex._coerce(name, value),
         result = p[name]();
 
       if (typedValue === typedValue) { // !isNaN(typedValue)
@@ -50,42 +50,42 @@ function testGetterSetterCoersion (name, t) {
   });
 }
 
-test("Pacemaker", function (t) {
-  t.test(".isPacemaker", function (st) {
-    st.test("should return whether the argument is a Pacemaker", function (sst) {
+test("Rolex", function (t) {
+  t.test(".isRolex", function (st) {
+    st.test("should return whether the argument is a Rolex", function (sst) {
       sst.plan(3);
 
-      sst.equal(Pacemaker.isPacemaker(1), false, "1 is not a Pacemaker");
-      sst.equal(Pacemaker.isPacemaker({}), false, "{} is not a Pacemaker");
-      sst.equal(Pacemaker.isPacemaker(Pacemaker()), true, "Pacemaker() returned a Pacemaker");
+      sst.equal(Rolex.isRolex(1), false, "1 is not a Rolex");
+      sst.equal(Rolex.isRolex({}), false, "{} is not a Rolex");
+      sst.equal(Rolex.isRolex(Rolex()), true, "Rolex() returned a Rolex");
     });
   });
   t.test(".setTimeout", function (st) {
     st.test("should equal setTimeout", function (sst) {
       sst.plan(1);
 
-      sst.equal(Pacemaker.setTimeout, _setTimeout, "Pacemaker.setTimeout equaled original setTimeout");
+      sst.equal(Rolex.setTimeout, _setTimeout, "Rolex.setTimeout equaled original setTimeout");
     });
   });
   t.test(".clearTimeout", function (st) {
     st.test("should equal clearTimeout", function (sst) {
       sst.plan(1);
 
-      sst.equal(Pacemaker.clearTimeout, _clearTimeout, "Pacemaker.clearTimeout equaled original clearTimeout");
+      sst.equal(Rolex.clearTimeout, _clearTimeout, "Rolex.clearTimeout equaled original clearTimeout");
     });
   });
   t.test(".setInterval", function (st) {
     st.test("should equal setInterval", function (sst) {
       sst.plan(1);
 
-      sst.equal(Pacemaker.setInterval, _setInterval, "Pacemaker.setInterval equaled original setInterval");
+      sst.equal(Rolex.setInterval, _setInterval, "Rolex.setInterval equaled original setInterval");
     });
   });
   t.test(".clearTimeout", function (st) {
     st.test("should equal clearInterval", function (sst) {
       sst.plan(1);
 
-      sst.equal(Pacemaker.clearInterval, _clearInterval, "Pacemaker.clearInterval equaled original clearInterval");
+      sst.equal(Rolex.clearInterval, _clearInterval, "Rolex.clearInterval equaled original clearInterval");
     });
   });
   t.test(".noConflict", function (st) {
@@ -97,7 +97,7 @@ test("Pacemaker", function (t) {
       global.setInterval = mockDuration;
       global.clearInterval = mockDuration;
 
-      Pacemaker.noConflict();
+      Rolex.noConflict();
 
       sst.equal(global.setTimeout, _setTimeout, "clearInterval reset to original value");
       sst.equal(global.clearTimeout, _clearTimeout, "clearTimeout reset to original value");
@@ -107,8 +107,8 @@ test("Pacemaker", function (t) {
   });
   t.test(".conflictInterval", function (st) {
     var conflictIntervalTest = function (sst) {
-      Pacemaker.conflictInterval();
-      sst.on('end', function () { Pacemaker.noConflict(); });
+      Rolex.conflictInterval();
+      sst.on('end', function () { Rolex.noConflict(); });
     };
 
     st.test("should replace setInterval and clearInterval", function (sst) {
@@ -118,13 +118,13 @@ test("Pacemaker", function (t) {
       sst.notEqual(global.setInterval, _setInterval, "setInterval changed from original value");
       sst.notEqual(global.clearInterval, _clearInterval, "clearInterval changed from original value");
 
-      var interval = global.setInterval(Pacemaker._identity, mockDuration);
+      var interval = global.setInterval(Rolex._identity, mockDuration);
 
-      sst.ok(Pacemaker.isPacemaker(interval), "overridden setInterval() returned a Pacemaker");
-      sst.equal(interval.state(), 'started', "overridden setInterval() returned a started Pacemaker");
+      sst.ok(Rolex.isRolex(interval), "overridden setInterval() returned a Rolex");
+      sst.equal(interval.state(), 'started', "overridden setInterval() returned a started Rolex");
 
       global.clearInterval(interval);
-      sst.equal(interval.state(), 'stopped', "overridden clearInterval() stopped given Pacemaker");
+      sst.equal(interval.state(), 'stopped', "overridden clearInterval() stopped given Rolex");
     });
 
     st.test("should still work with intervalIds", function (sst) {
@@ -136,32 +136,32 @@ test("Pacemaker", function (t) {
       global.clearInterval(_setInterval(function () {
         called = true;
       }, mockDuration));
-      Pacemaker(mockDuration * 2, function () {
+      Rolex(mockDuration * 2, function () {
         sst.notOk(called, "overridden clearInterval() cleared original setInterval");
       }).start();
     });
   });
   t.test(".conflict", function (st) {
     var conflictIntervalCalled = false;
-    var _conflictInterval = Pacemaker.conflictInterval;
-    Pacemaker.conflictInterval = function () {
+    var _conflictInterval = Rolex.conflictInterval;
+    Rolex.conflictInterval = function () {
       conflictIntervalCalled = true;
       return _conflictInterval.apply(this, arguments);
     };
     st.on('end', function () {
-      Pacemaker.conflictInterval = _conflictInterval;
+      Rolex.conflictInterval = _conflictInterval;
     });
 
     var conflictTest = function (t) {
-      Pacemaker.conflict();
-      t.on('end', function () { Pacemaker.noConflict(); });
+      Rolex.conflict();
+      t.on('end', function () { Rolex.noConflict(); });
     };
 
-    st.test("should call Pacemaker.conflictInterval", function (sst) {
+    st.test("should call Rolex.conflictInterval", function (sst) {
       conflictTest(sst);
       sst.plan(1);
 
-      sst.ok(conflictIntervalCalled, "Pacemaker.conflict called Pacemaker.conflictInterval");
+      sst.ok(conflictIntervalCalled, "Rolex.conflict called Rolex.conflictInterval");
     });
     st.test("should replace setTimeout and clearTimeout", function (sst) {
       conflictTest(sst);
@@ -170,13 +170,13 @@ test("Pacemaker", function (t) {
       sst.notEqual(global.setTimeout, _setTimeout, "setTimeout changed from original value");
       sst.notEqual(global.clearTimeout, _clearTimeout, "clearTimeout changed from original value");
 
-      var timeout = global.setTimeout(Pacemaker._identity, mockDuration);
+      var timeout = global.setTimeout(Rolex._identity, mockDuration);
 
-      sst.ok(Pacemaker.isPacemaker(timeout), "overridden setTimeout() returned a Pacemaker");
-      sst.equal(timeout.state(), 'started', "overridden setTimeout() returned a started Pacemaker");
+      sst.ok(Rolex.isRolex(timeout), "overridden setTimeout() returned a Rolex");
+      sst.equal(timeout.state(), 'started', "overridden setTimeout() returned a started Rolex");
 
       global.clearTimeout(timeout);
-      sst.equal(timeout.state(), 'stopped', "overridden setTimeout() stopped given Pacemaker");
+      sst.equal(timeout.state(), 'stopped', "overridden setTimeout() stopped given Rolex");
     });
     st.test("should still work with timeoutIds", function (sst) {
       conflictTest(sst);
@@ -187,7 +187,7 @@ test("Pacemaker", function (t) {
       global.clearTimeout(_setTimeout(function () {
         called = true;
       }, mockDuration));
-      Pacemaker(mockDuration * 2, function () {
+      Rolex(mockDuration * 2, function () {
         sst.notOk(called, "overridden clearTimeout() cleared original setTimeout");
       }).start();
     });
@@ -197,46 +197,46 @@ test("Pacemaker", function (t) {
     st.test("should instantiate with default values when passed no arguments", function (sst) {
       sst.plan(5);
 
-      var p = Pacemaker();
+      var p = Rolex();
 
-      assertPacemakerReturnsValues(sst, p);
+      assertRolexReturnsValues(sst, p);
     });
 
     st.test("should instantiate with default values when passed {}", function (sst) {
       sst.plan(5);
 
-      var p = Pacemaker({});
+      var p = Rolex({});
 
-      assertPacemakerReturnsValues(sst, p);
+      assertRolexReturnsValues(sst, p);
     });
 
     st.test("should instantiate when passed duration", function (sst) {
       sst.plan(5);
 
-      var p = Pacemaker(mockDuration);
+      var p = Rolex(mockDuration);
 
-      assertPacemakerReturnsValues(sst, p, {duration: mockDuration});
+      assertRolexReturnsValues(sst, p, {duration: mockDuration});
     });
 
     st.test("should instantiate when passed duration, tick", function (sst) {
       sst.plan(5);
 
-      var p = Pacemaker(mockDuration, Pacemaker._identity);
+      var p = Rolex(mockDuration, Rolex._identity);
 
-      assertPacemakerReturnsValues(sst, p, {
+      assertRolexReturnsValues(sst, p, {
         duration: mockDuration,
-        tick: Pacemaker._identity
+        tick: Rolex._identity
       });
     });
 
     st.test("should instantiate when passed duration, repeatInt, tick", function (sst) {
       sst.plan(5);
 
-      var p = Pacemaker(mockDuration, mockRepeat, Pacemaker._identity);
+      var p = Rolex(mockDuration, mockRepeat, Rolex._identity);
 
-      assertPacemakerReturnsValues(sst, p, {
+      assertRolexReturnsValues(sst, p, {
         duration: mockDuration,
-        tick: Pacemaker._identity,
+        tick: Rolex._identity,
         repeat: mockRepeat
       });
     });
@@ -244,11 +244,11 @@ test("Pacemaker", function (t) {
     st.test("should instantiate when passed duration, true, tick", function (sst) {
       sst.plan(5);
 
-      var p = Pacemaker(mockDuration, true, Pacemaker._identity);
+      var p = Rolex(mockDuration, true, Rolex._identity);
 
-      assertPacemakerReturnsValues(sst, p, {
+      assertRolexReturnsValues(sst, p, {
         duration: mockDuration,
-        tick: Pacemaker._identity,
+        tick: Rolex._identity,
         repeat: true
       });
     });
@@ -258,24 +258,24 @@ test("Pacemaker", function (t) {
 
       var opts = {
         duration: mockDuration,
-        tick: Pacemaker._identity,
+        tick: Rolex._identity,
         repeat: mockRepeat,
         threshold: mockThreshold,
         aggression: mockAggression
       };
 
-      var p = Pacemaker(opts);
+      var p = Rolex(opts);
 
-      assertPacemakerReturnsValues(sst, p, opts);
+      assertRolexReturnsValues(sst, p, opts);
     });
     st.test("should work with the 'new' keyword", function (sst) {
       sst.plan(5);
 
-      var p = new Pacemaker(mockDuration, mockRepeat, Pacemaker._identity);
+      var p = new Rolex(mockDuration, mockRepeat, Rolex._identity);
 
-      assertPacemakerReturnsValues(sst, p, {
+      assertRolexReturnsValues(sst, p, {
         duration: mockDuration,
-        tick: Pacemaker._identity,
+        tick: Rolex._identity,
         repeat: mockRepeat
       });
     });
@@ -284,22 +284,22 @@ test("Pacemaker", function (t) {
     st.test("should throw TypeError if duration is unspecified", function (sst) {
       sst.plan(1);
 
-      var p = Pacemaker();
+      var p = Rolex();
       sst.throws(p.start.bind(p), TypeError, "msToTick is NaN");
     });
 
-    st.test("should return a Pacemaker", function (sst) {
+    st.test("should return a Rolex", function (sst) {
       sst.plan(2);
 
-      var p = Pacemaker(mockDuration).start();
-      sst.ok(Pacemaker.isPacemaker(p), "p.start() returned a Pacemaker");
-      sst.equal(p.state(), 'started', "p.start() returned a started Pacemaker");
+      var p = Rolex(mockDuration).start();
+      sst.ok(Rolex.isRolex(p), "p.start() returned a Rolex");
+      sst.equal(p.state(), 'started', "p.start() returned a started Rolex");
       p.stop();
     });
 
     st.test("should eventually throw TypeError if tick is unspecified", function (sst) {
       var
-        p = Pacemaker(mockDuration),
+        p = Rolex(mockDuration),
         start = p.start;
 
       (p.start = function () {
@@ -319,7 +319,7 @@ test("Pacemaker", function (t) {
       // TODO: strengthen this condition if possible
       var
         count = 0,
-        p = Pacemaker(mockDuration, function () {
+        p = Rolex(mockDuration, function () {
           sst.ok(count < Math.log(this.duration())/Math.log(this.aggression()) + 1, "p.start() was called no more than log_aggression(duration) times before a tick");
         }),
         start = p.start;
@@ -333,7 +333,7 @@ test("Pacemaker", function (t) {
     st.skip("should call tick within duration +/- threshold", function (sst) {
       sst.plan(mockRepeat * 2);
 
-      Pacemaker(mockDuration, mockRepeat, function () {
+      Rolex(mockDuration, mockRepeat, function () {
         assertWithin(sst, this.tickTime(0), present(), this.threshold());
       }).start();
     });
@@ -341,32 +341,32 @@ test("Pacemaker", function (t) {
     st.test("should call tick repeat times if repeat is an integer", function (sst) {
       sst.plan(1);
 
-      var p = Pacemaker(mockDuration, mockRepeat, function () {
+      var p = Rolex(mockDuration, mockRepeat, function () {
         if (this.isLastTick()) {
           sst.equal(this.count(), this.repeat(), "p.start() was called " + this.count() + " times");
         }
       }).start();
     });
 
-    st.test("should call tick with pacemaker instance as this", function (sst) {
+    st.test("should call tick with rolex instance as this", function (sst) {
       sst.plan(1);
 
-      var p = Pacemaker(mockDuration, 1, function () {
+      var p = Rolex(mockDuration, 1, function () {
         sst.equal(this, p, "p.tick() called with p as this");
       }).start();
     });
   });
   t.test("#stop", function (st) {
-    st.test("should return a Pacemaker", function (sst) {
+    st.test("should return a Rolex", function (sst) {
       sst.plan(1);
 
-      sst.ok(Pacemaker.isPacemaker(Pacemaker().stop()), "p.stop() returned a Pacemaker");
+      sst.ok(Rolex.isRolex(Rolex().stop()), "p.stop() returned a Rolex");
     });
 
-    st.test("should stop a started Pacemaker", function (sst) {
+    st.test("should stop a started Rolex", function (sst) {
       sst.plan(2);
 
-      var p = Pacemaker(mockDuration, true, function () {
+      var p = Rolex(mockDuration, true, function () {
         sst.equal(this.state(), 'started', "p.state() returned 'started' within tick");
         this.stop();
         sst.equal(this.state(), 'stopped', "p.stop() changed state from 'started' to 'stopped'");
@@ -376,7 +376,7 @@ test("Pacemaker", function (t) {
     st.test("should do nothing if not started", function (sst) {
       sst.plan(3);
 
-      var p = Pacemaker();
+      var p = Rolex();
       sst.equal(p.state(), 'stopped', "newly-created p.state() returned 'stopped'");
       sst.doesNotThrow(p.stop.bind(p), "p.stop() didn't throw an exception");
       sst.equal(p.state(), 'stopped', "p.stop() didn't change p's state");
@@ -389,7 +389,7 @@ test("Pacemaker", function (t) {
     st.test("should not coerce if arg.call is a function", function (sst) {
       sst.plan(3);
 
-      var p = Pacemaker();
+      var p = Rolex();
 
       sst.throws(p.tick.bind(p, {}), SyntaxError, "Unexpected identifier");
       sst.throws(p.tick.bind(p, {call: ''}), SyntaxError, "Unexpected identifier");
@@ -403,10 +403,10 @@ test("Pacemaker", function (t) {
 
   // Getters
   t.test("#tickTime", function (st) {
-    st.test("should return undefined when Pacemaker is not started", function (sst) {
+    st.test("should return undefined when Rolex is not started", function (sst) {
       sst.plan(5);
 
-      var p = Pacemaker(mockDuration, mockRepeat, Pacemaker._identity);
+      var p = Rolex(mockDuration, mockRepeat, Rolex._identity);
 
       sst.equal(p.tickTime(), undefined, "newly-created p.tickTime() returned undefined");
       sst.equal(p.tickTime(-1), undefined, "newly-created p.tickTime(-1) returned undefined");
@@ -418,7 +418,7 @@ test("Pacemaker", function (t) {
       var ns = [-1, 0, 1, 2];
       sst.plan(mockRepeat * ns.length);
 
-      var p = Pacemaker(mockDuration, mockRepeat, function () {
+      var p = Rolex(mockDuration, mockRepeat, function () {
         ns.forEach(function (n) {
           sst.equal(p.tickTime(n), p.startTime() + p.duration() * (p.count() + n), "p.tickTime(" + n + ") returned time " + n + " ticks from start time");
         });
@@ -427,7 +427,7 @@ test("Pacemaker", function (t) {
     st.test("should return time next tick will be called when passed no arguments", function (sst) {
       sst.plan(mockRepeat);
 
-      Pacemaker(mockDuration, mockRepeat, function () {
+      Rolex(mockDuration, mockRepeat, function () {
         sst.equal(this.tickTime(), this.tickTime(1), "p.tickTime() returned time next tick will be called");
       }).start();
     });
@@ -437,7 +437,7 @@ test("Pacemaker", function (t) {
     st.test("should return whether the current tick is the last tick from within a tick", function (sst) {
       sst.plan(mockRepeat);
 
-      Pacemaker(mockDuration, mockRepeat, function () {
+      Rolex(mockDuration, mockRepeat, function () {
         sst.equal(this.isLastTick(), this.count() === this.repeat(), "p.isLastTick() returned whether the current tick is the last tick from within a tick");
       }).start();
     });
@@ -447,7 +447,7 @@ test("Pacemaker", function (t) {
     st.test("should return now - startTime", function (sst) {
       sst.plan((mockRepeat * 2) + 1);
 
-      var p = Pacemaker(mockDuration, mockRepeat, function () {
+      var p = Rolex(mockDuration, mockRepeat, function () {
         assertWithin(sst, this.runTime(), present() - this.startTime(), 1);
       });
       sst.equal(p.runTime(), 0, "newly-created p.runTime() returned 0");
@@ -460,7 +460,7 @@ test("Pacemaker", function (t) {
       sst.plan(mockRepeat + 1);
 
       var count = 0;
-      var p = Pacemaker(mockDuration, mockRepeat, function () {
+      var p = Rolex(mockDuration, mockRepeat, function () {
         sst.equal(this.count(), ++count, "p.count() incremented after a tick");
       });
       sst.equal(p.count(), 0, "newly-created p.count() returned 0");
@@ -469,27 +469,27 @@ test("Pacemaker", function (t) {
     st.skip("should return floor(runTime/duration + 0.5)", function (sst) {
       sst.plan(mockRepeat);
 
-      Pacemaker(mockDuration, mockRepeat, function () {
+      Rolex(mockDuration, mockRepeat, function () {
         sst.equal(this.count(), Math.floor(this.runTime()/this.duration() + 0.5), "p.count() returned floor(runTime/duration + 0.5)");
       }).start();
     });
   });
 
   t.test("#state", function (st) {
-    st.test("should return 'stopped' before Pacemaker is started", function (sst) {
+    st.test("should return 'stopped' before Rolex is started", function (sst) {
       sst.plan(1);
 
-      sst.equal(Pacemaker().state(), 'stopped', "newly-created p.state() returned 'stopped'");
+      sst.equal(Rolex().state(), 'stopped', "newly-created p.state() returned 'stopped'");
     });
-    st.test("should return 'started' after Pacemaker is started", function (sst) {
+    st.test("should return 'started' after Rolex is started", function (sst) {
       sst.plan(1);
 
-      sst.equal(Pacemaker(mockDuration, Pacemaker._identity).start().state(), 'started', "p.state() returned 'started' after p.start()");
+      sst.equal(Rolex(mockDuration, Rolex._identity).start().state(), 'started', "p.state() returned 'started' after p.start()");
     });
-    st.test("should return 'stopped' after Pacemaker is stopped", function (sst) {
+    st.test("should return 'stopped' after Rolex is stopped", function (sst) {
       sst.plan(2);
 
-      Pacemaker(mockDuration, true, function () {
+      Rolex(mockDuration, true, function () {
         sst.equal(this.state(), 'started', "p.state() returned 'started' within tick");
         this.stop();
         sst.equal(this.state(), 'stopped', "p.state() changed state from 'started' to 'stopped'");
@@ -498,16 +498,16 @@ test("Pacemaker", function (t) {
   });
 
   t.test("#startTime", function (st) {
-    st.test("should return undefined if Pacemaker is not started", function (sst) {
+    st.test("should return undefined if Rolex is not started", function (sst) {
       sst.plan(1);
 
-      sst.equal(Pacemaker().startTime(), undefined, "newly-created p.startTime() returned undefined");
+      sst.equal(Rolex().startTime(), undefined, "newly-created p.startTime() returned undefined");
     });
-    st.test("should return time when Pacemaker was started", function (sst) {
+    st.test("should return time when Rolex was started", function (sst) {
       sst.plan(2 * (mockRepeat + 1));
 
       var now = present();
-      var p = Pacemaker(mockDuration, mockRepeat, function () {
+      var p = Rolex(mockDuration, mockRepeat, function () {
         assertWithin(sst, this.startTime(), now, 1);
       }).start();
       assertWithin(sst, p.startTime(), now, 1);

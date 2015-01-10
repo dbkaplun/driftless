@@ -1,10 +1,10 @@
 {
-  "name": "pacemaker",
-  "main": "pacemaker",
+  "name": "rolex",
+  "main": "rolex",
   "version": "0.0.0",
-  "homepage": "https://github.com/beardtree/pacemaker",
+  "homepage": "https://github.com/secrettriangle/rolex",
   "authors": [
-    "Dan Kaplun <dan@beardtree.com>"
+    "Dan Kaplun <dan@secrettriangle.net>"
   ],
   "description": "A better setTimeout/setInterval",
   "keywords": [
