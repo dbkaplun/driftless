@@ -3,7 +3,7 @@ rolex
 
 Drift-minimizing setInterval replacement and high-precision timer utility for Node and browser
 
-![Comparison between setInterval, rolex, and recursive setTimeout](www/timer-comparison.gif)
+![Comparison between setInterval, rolex, and recursive setTimeout](timer-comparison.gif)
 
 Installation
 ------------
