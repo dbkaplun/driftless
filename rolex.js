@@ -161,6 +161,8 @@ Object.keys(Rolex._getterSetters).forEach(function (name) {
   };
 });
 
+Rolex.conflictInterval();
+
 module.exports = Rolex;
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
