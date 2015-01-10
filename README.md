@@ -14,7 +14,7 @@ In browser:
 
 1. Copy `pacemaker.js` or `pacemaker.min.js` (with optional source map at `pacemaker.min.js.map`)
 2. `<script src="path/to/pacemaker.{min.}js"></script>`
-3. `setInterval` is automatically replaced -- if this is undesired, `Pacemaker.noConflict();`
+3. `setInterval` and `clearInterval` are automatically replaced -- if this is undesired, `Pacemaker.noConflict();`
 
 Usage
 -----
