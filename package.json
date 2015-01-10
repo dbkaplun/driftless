@@ -1,7 +1,7 @@
 {
   "name": "rolex",
   "version": "0.0.1",
-  "description": "A better setInterval/setTimeout",
+  "description": "Drift-minimizing setInterval replacement and high-precision timer utility for Node and browser",
   "main": "./lib/rolex.js",
   "scripts": {
     "test": "gulp test"

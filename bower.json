@@ -6,7 +6,7 @@
   "authors": [
     "Dan Kaplun <dan@secrettriangle.net>"
   ],
-  "description": "A better setTimeout/setInterval",
+  "description": "Drift-minimizing setInterval replacement and high-precision timer utility for Node and browser",
   "keywords": [
     "setTimeout",
     "setInterval",
