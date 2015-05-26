@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/secrettriangle/rolex.git"
+    "url": "git://github.com/dbkaplun/rolex.git"
   },
   "keywords": [
     "setInterval",
@@ -20,10 +20,10 @@
     "accurate",
     "drift"
   ],
-  "author": "Dan Kaplun <dan@secrettriangle.net>",
+  "author": "Dan Kaplun <dbkaplun@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/secrettriangle/rolex/issues"
+    "url": "https://github.com/dbkaplun/rolex/issues"
   },
   "dependencies": {
     "present": "^0.0.3"

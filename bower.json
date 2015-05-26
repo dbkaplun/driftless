@@ -2,9 +2,9 @@
   "name": "rolex",
   "main": "rolex",
   "version": "0.0.1",
-  "homepage": "https://github.com/secrettriangle/rolex",
+  "homepage": "https://github.com/dbkaplun/rolex",
   "authors": [
-    "Dan Kaplun <dan@secrettriangle.net>"
+    "Dan Kaplun <dbkaplun@gmail.com>"
   ],
   "description": "Drift-minimizing setInterval replacement and high-precision timer utility for Node and browser",
   "keywords": [
