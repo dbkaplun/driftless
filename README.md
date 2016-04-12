@@ -19,9 +19,11 @@ In browser:
 Usage
 -----
 
-    var Rolex = require('rolex'); // Node only
-    var p = Rolex(10, function () {
-      console.log('executes in 10 ms');
-    }).start();
+```js
+var Rolex = require('rolex')
+var r = Rolex(10, () => {
+  console.log('executes in 10 ms')
+}).start()
+```
 
 More examples in [test/rolex.js](test/rolex.js).
