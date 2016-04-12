@@ -1,6 +1,6 @@
 {
   "name": "rolex",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Drift-minimizing setInterval replacement and high-precision timer utility for Node and browser",
   "main": "./lib/rolex.js",
   "scripts": {
@@ -56,7 +56,12 @@
   },
   "jshintConfig": ".jshintrc",
   "browserify": {
-    "transform": ["envify", "browserify-shim", "debowerify", "deamdify"]
+    "transform": [
+      "envify",
+      "browserify-shim",
+      "debowerify",
+      "deamdify"
+    ]
   },
   "browserify-shim": {
     "jquery": "global:jQuery"
