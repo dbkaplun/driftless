@@ -1,5 +1,5 @@
-rolex
-=========
+rolex [![rolex on npm](https://img.shields.io/npm/dm/rolex.svg?maxAge=2592000)](https://www.npmjs.com/package/rolex) [![build status](https://img.shields.io/travis/dbkaplun/rolex.svg?maxAge=2592000)](https://travis-ci.org/dbkaplun/rolex)
+=====
 
 Drift-minimizing setInterval replacement and high-precision timer utility for Node and browser
 
