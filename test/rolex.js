@@ -307,7 +307,7 @@ test("Rolex", function (t) {
           start.apply(this, arguments);
         } catch (e) {
           sst.ok(e instanceof TypeError, "p.start() eventually threw a TypeError because no tick was specified");
-          sst.equal(e.message, "Cannot call method 'call' of undefined");
+          sst.equal(e.message, "Cannot read property 'call' of undefined");
           sst.end();
         }
       }).call(p);
