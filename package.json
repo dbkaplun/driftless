@@ -28,9 +28,7 @@
   "dependencies": {
     "present": "^0.0.3"
   },
-  "peerDependencies": {
-    "bower": "*"
-  },
+  
   "devDependencies": {
     "blessed": "^0.0.26",
     "browserify": "^8.1.0",
