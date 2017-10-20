@@ -1,6 +1,6 @@
 {
   "name": "rolex",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Drift-minimizing setInterval replacement and high-precision timer utility for Node and browser",
   "main": "./lib/rolex.js",
   "scripts": {
