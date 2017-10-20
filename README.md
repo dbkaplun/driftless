@@ -1,12 +1,16 @@
-rolex [![rolex on npm](https://img.shields.io/npm/dm/rolex.svg?maxAge=2592000)](https://www.npmjs.com/package/rolex) [![build status](https://img.shields.io/travis/dbkaplun/rolex.svg?maxAge=2592000)](https://travis-ci.org/dbkaplun/rolex)
-=====
+# rolex [![rolex on npm](https://img.shields.io/npm/dm/rolex.svg?maxAge=2592000)](https://www.npmjs.com/package/rolex) [![build status](https://img.shields.io/travis/dbkaplun/rolex.svg?maxAge=2592000)](https://travis-ci.org/dbkaplun/rolex)
 
 Drift-minimizing setInterval replacement and high-precision timer utility for Node and browser
 
 ![Comparison between setInterval, rolex, and recursive setTimeout](timer-comparison.gif)
 
-Installation
-------------
+## How it works
+
+To ensure maximal accuracy compared with setTimeout, Rolex calls setTimeout *in advance* of the requested timeout, then checks how close the requested timeout
+is. It does this recursively until the timeout is reached within a given
+threshold. Both the `aggression` and `threshold` are user-configurable.
+
+## Installation
 
 In Node: `npm install rolex`
 
@@ -16,8 +20,7 @@ In browser:
 2. `<script src="path/to/rolex.{min.}js"></script>`
 3. `setInterval` and `clearInterval` are automatically replaced -- if this is undesired, `Rolex.noConflict();`
 
-Usage
------
+## Usage
 
 ```js
 var Rolex = require('rolex')
