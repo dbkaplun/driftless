@@ -1,66 +1,42 @@
 {
-  "name": "rolex",
+  "name": "driftless",
   "version": "1.1.2",
-  "description": "Drift-minimizing setInterval replacement and high-precision timer utility for Node and browser",
-  "main": "./lib/rolex.js",
-  "scripts": {
-    "test": "gulp test"
-  },
-  "bin": {
-    "timer-comparison": "bin/timer-comparison.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/dbkaplun/rolex.git"
-  },
+  "description": "Driftless setInterval and setTimeout replacement for Node and the browser",
   "keywords": [
     "setInterval",
     "setTimeout",
     "precise",
     "accurate",
-    "drift"
+    "drift",
+    "driftless"
   ],
-  "author": "Dan Kaplun <dbkaplun@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/dbkaplun/rolex/issues"
+  "homepage": "https://github.com/dbkaplun/driftless",
+  "repository": "https://github.com/dbkaplun/driftless",
+  "bugs": "https://github.com/dbkaplun/driftless/issues",
+  "main": "./lib/driftless.js",
+  "scripts": {
+    "test": "npm run eslint && npm run jest",
+    "build": "rm -rf lib/ && babel -d lib/ src/",
+    "version": "npm run build && git add -A lib/ && npm test",
+    "eslint": "eslint .",
+    "jest": "jest"
   },
   "dependencies": {
     "present": "^0.0.3"
   },
   "devDependencies": {
-    "blessed": "^0.0.26",
-    "browserify": "^8.1.0",
-    "browserify-shim": "^3.8.2",
-    "deamdify": "^0.1.1",
-    "debowerify": "^0.7.0",
-    "envify": "^1.2.1",
-    "gulp": "^3.8.10",
-    "gulp-browserify": "^0.5.1",
-    "gulp-exec": "^1.0.4",
-    "gulp-flatten": "^0.0.2",
-    "gulp-jshint": "^1.9.0",
-    "gulp-less": "^1.2.2",
-    "gulp-rename": "^1.2.0",
-    "gulp-uglify": "^0.2.1",
-    "humanize": "^0.0.9",
-    "istanbul": "^0.2.6",
-    "jshint-stylish": "^0.1.5",
-    "less": "^1.7.0",
-    "node-static": "^0.7.3",
-    "open": "^0.0.4",
-    "tape": "^2.10.2"
+    "babel-cli": "6.26.0",
+    "babel-jest": "22.4.3",
+    "babel-preset-env": "1.7.0",
+    "blessed": "0.1.81",
+    "eslint": "4.19.1",
+    "eslint-config-airbnb": "16.1.0",
+    "eslint-plugin-import": "2.11.0",
+    "eslint-plugin-jsx-a11y": "6.0.3",
+    "eslint-plugin-react": "7.8.2",
+    "jest": "22.4.3",
+    "lolex": "2.6.0"
   },
-  "jshintConfig": ".jshintrc",
-  "browserify": {
-    "transform": [
-      "envify",
-      "browserify-shim",
-      "debowerify",
-      "deamdify"
-    ]
-  },
-  "browserify-shim": {
-    "jquery": "global:jQuery"
-  }
+  "author": "Dan Kaplun <dbkaplun@gmail.com>",
+  "license": "MIT"
 }

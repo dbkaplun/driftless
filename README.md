@@ -1,32 +1,26 @@
-# rolex [![rolex on npm](https://img.shields.io/npm/dm/rolex.svg?maxAge=2592000)](https://www.npmjs.com/package/rolex) [![build status](https://img.shields.io/travis/dbkaplun/rolex.svg?maxAge=2592000)](https://travis-ci.org/dbkaplun/rolex)
+# `driftless` [![Build Status](https://travis-ci.org/dbkaplun/driftless.svg?branch=master)](https://travis-ci.org/dbkaplun/driftless)
 
-Drift-minimizing setInterval replacement and high-precision timer utility for Node and browser
+Driftless setInterval and setTimeout replacement for Node and the browser
 
-![Comparison between setInterval, rolex, and recursive setTimeout](timer-comparison.gif)
+![comparison](timer-comparison.gif)
 
 ## How it works
 
-To ensure maximal accuracy compared with setTimeout, Rolex calls setTimeout *in advance* of the requested timeout, then checks how close the requested timeout
-is. It does this recursively until the timeout is reached within a given
-threshold. Both the `aggression` and `threshold` are user-configurable.
-
-## Installation
-
-In Node: `npm install rolex`
-
-In browser:
-
-1. Copy `rolex.js` or `rolex.min.js` (with optional source map at `rolex.min.js.map`)
-2. `<script src="path/to/rolex.{min.}js"></script>`
-3. `setInterval` and `clearInterval` are automatically replaced -- if this is undesired, `Rolex.noConflict();`
+`driftless` repeatedly calls setTimeout in advance of the requested timeout for
+greater accuracy. It does this recursively, until the timeout is reached within
+a given threshold.
 
 ## Usage
 
-```js
-var Rolex = require('rolex')
-var r = Rolex(10, () => {
-  console.log('executes in 10 ms')
-}).start()
+```
+npm install driftless
 ```
 
-More examples in [test/rolex.js](test/rolex.js).
+```js
+import {
+  setDriftlessTimeout,
+  setDriftlessInterval,
+  clearDriftless,
+} from 'driftless';
+// Use like setTimeout and setInterval
+```
