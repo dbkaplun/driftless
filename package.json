@@ -1,6 +1,6 @@
 {
   "name": "driftless",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Driftless setInterval and setTimeout replacement for Node and the browser",
   "keywords": [
     "setInterval",
