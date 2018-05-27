@@ -2,13 +2,7 @@
 
 Driftless setInterval and setTimeout replacement for Node and the browser
 
-![comparison](timer-comparison.gif)
-
-## How it works
-
-`driftless` repeatedly calls setTimeout in advance of the requested timeout for
-greater accuracy. It does this recursively, until the timeout is reached within
-a given threshold.
+[![comparison](comparison.gif)](https://asciinema.org/a/183890)
 
 ## Usage
 
@@ -24,3 +18,9 @@ import {
 } from 'driftless';
 // Use like setTimeout and setInterval
 ```
+
+## How it works
+
+`driftless` repeatedly calls setTimeout in advance of the requested timeout for
+greater accuracy. It does this recursively, until the timeout is reached within
+a given threshold.
