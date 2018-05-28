@@ -3,6 +3,6 @@ examples
 tests
 .babelrc
 .eslintignore
-.eslintrc
+.eslintrc.js
 .travis.yml
 comparison.gif
