@@ -2,7 +2,7 @@
 
 Driftless setInterval and setTimeout replacement for Node and the browser
 
-[![comparison](comparison.gif)](https://asciinema.org/a/183890)
+[![comparison](https://github.com/dbkaplun/driftless/raw/master/comparison.gif)](https://asciinema.org/a/183890)
 
 ## Usage
 

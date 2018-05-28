@@ -1,1 +1,8 @@
-timer-comparison.gif
+.vscode
+examples
+tests
+.babelrc
+.eslintignore
+.eslintrc
+.travis.yml
+comparison.gif
