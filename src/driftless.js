@@ -7,7 +7,7 @@ export const DEFAULT_SET_TIMEOUT = (...args) => setTimeout(...args);
 export const DEFAULT_CLEAR_TIMEOUT = (...args) => clearTimeout(...args);
 
 const timerHandles = {};
-let nextId = 0;
+let nextId = 1;
 
 function tryDriftless(id, opts) {
   const {
